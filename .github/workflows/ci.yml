@@ -1,0 +1,21 @@
+name: CI-1
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  kavi-job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run test:e2e
+      - run: npm run build
