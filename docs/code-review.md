@@ -1,11 +1,11 @@
 # Automated code review on pull requests
 
-A pull request's checks list shows results from three kinds of sources. Only the first one is GitHub Actions.
+A pull request's checks list shows results that are set up in three different ways. How a check is set up and where it runs are separate questions.
 
 | Source | Example | How it is set up | Where it runs |
 |---|---|---|---|
-| GitHub Actions jobs | `CI-1 / kavi-job-1`, `CI-1 / kavi-docker-job-1` | YAML files in `.github/workflows/` | GitHub's runners |
-| GitHub features | CodeQL code scanning | Switched on in repository settings, no file | GitHub |
+| Workflow files | `CI-1 / kavi-job-1`, `CI-1 / kavi-docker-job-1` | YAML files in `.github/workflows/` | GitHub Actions runners |
+| GitHub features | CodeQL code scanning (default setup) | Switched on in repository settings, no file in the repository | GitHub Actions runners, managed by GitHub; its runs and logs appear in the Actions tab |
 | GitHub Apps | CodeRabbit, other review bots | Installed on the account or organization once | The app's own servers |
 
 A check row's name follows `workflow name / job name (event)` for GitHub Actions jobs. App checks show the app's name only.

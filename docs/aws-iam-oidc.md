@@ -94,7 +94,7 @@ steps:
 | Credential lifetime | Until deleted | About an hour per run |
 | Can be limited to one repo / branch | No, anyone with the keys | Yes, by the trust policy |
 | Rotation | Manual | Not needed |
-| If leaked | Usable until revoked | Expires quickly, and only works for that repo/branch |
+| If leaked | Usable by whoever holds them, from anywhere, until revoked | Usable by whoever holds them, from anywhere, but only until they expire (about an hour) and only within the role's policy. The trust policy controls who can *get* credentials, not where issued credentials are used. |
 
 ## What a demo should show
 

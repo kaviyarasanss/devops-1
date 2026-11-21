@@ -87,7 +87,7 @@ The app enables NestJS shutdown hooks, so `docker stop` ends it cleanly (exit co
 docker build -t devops-1 .
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 init
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 apply -auto-approve
-curl http://localhost:8080/health
+for i in 1 2 3 4 5 6 7 8 9 10; do curl -fs http://localhost:8080/health && break; sleep 2; done
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 destroy -auto-approve
 ```
 
