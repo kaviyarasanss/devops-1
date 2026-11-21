@@ -78,3 +78,21 @@ docker run -d -e PORT=7777 -p 3000:7777 devops-1
 ```
 
 The app enables NestJS shutdown hooks, so `docker stop` ends it cleanly (exit code 0) instead of force-killing it after 10 seconds.
+
+## Run with Terraform
+
+`infra/main.tf` runs the image built above as the container `devops-1-terraform` on port 8080. Terraform can run from its Docker image, so it does not need to be installed:
+
+```bash
+docker build -t devops-1 .
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 init
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 apply -auto-approve
+for i in 1 2 3 4 5 6 7 8 9 10; do curl -fs http://localhost:8080/health && break; sleep 2; done
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD":/workspace -w /workspace/infra hashicorp/terraform:1.9.8 destroy -auto-approve
+```
+
+## Further reading
+
+- [docs/code-review.md](docs/code-review.md): GitHub Actions checks vs GitHub features vs review apps such as CodeRabbit, and which ones block a merge.
+- [docs/deployment-flow.md](docs/deployment-flow.md): build → registry → run → health check after CI.
+- [docs/aws-iam-oidc.md](docs/aws-iam-oidc.md): IAM user access keys vs GitHub OIDC with an IAM role for a deploy workflow.
