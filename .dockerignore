@@ -3,3 +3,6 @@ dist
 .git
 coverage
 .env*
+infra/.terraform
+*.tfstate
+*.tfstate.*
