@@ -5,3 +5,8 @@ coverage
 *.log
 .env
 .env.*
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
