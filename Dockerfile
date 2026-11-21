@@ -16,4 +16,4 @@ COPY --from=build /app/dist ./dist
 USER node
 # Documentation only: says the app listens on 3000. It doesn't open or publish the port.
 EXPOSE 3000
-CMD ["node", "dist/main"]
+CMD ["node", "dist/wrong"]
